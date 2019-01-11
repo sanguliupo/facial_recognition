@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Navigation from './Components/Navigation/Navigation';
 import SignIn from './Components/SignIn/SignIn';
+import Register from './Components/Register/Register';
 import Logo from './Components/Logo/Logo';
 import Rank from './Components/Rank/Rank';
 import ImageLinkForm from './Components/ImageLinkForm/ImageLinkForm';
@@ -44,7 +45,7 @@ class App extends Component {
       left_col: '',
       bottom_row: '',
       right_col: '',
-      route: 'signi'
+      route: 'signin'
     };
   }
 
@@ -66,7 +67,6 @@ class App extends Component {
     const image = document.getElementById('inputimage');
     const width = Number(image.width);
     const height = Number(image.height);
-    console.log(width, height);
     this.setState({
       left_col: clarifaiFace.left_col * width,
       top_row: clarifaiFace.top_row * height,
@@ -75,13 +75,16 @@ class App extends Component {
     });
   };
 
+  onRouteChange = route => {
+    this.setState({ route: route });
+  };
+
   render() {
     return (
       <div className="App">
-        <Navigation />
-        {this.state.route === 'signin' ? (
-          <SignIn />
-        ) : (
+        <Navigation onRouteChange={this.onRouteChange} />
+
+        {this.state.route === 'home' ? (
           <div>
             <Logo />
             <Rank />
@@ -90,16 +93,18 @@ class App extends Component {
               onInputChange={this.onInputChange}
             />
             <FaceRecognition
-              onSubmit={this.onSubmit}
               imageUrl={this.state.imageUrl}
               top_row={this.state.top_row}
               left_col={this.state.left_col}
               bottom_row={this.state.bottom_row}
               right_col={this.state.right_col}
             />
-
             <Particles className="particles" params={particlesOptions} />
           </div>
+        ) : this.state.route === 'signin' ? (
+          <SignIn onRouteChange={this.onRouteChange} />
+        ) : (
+          <Register onRouteChange={this.onRouteChange} />
         )}
       </div>
     );

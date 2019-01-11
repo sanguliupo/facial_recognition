@@ -5,10 +5,11 @@ class Navigation extends Component {
 		return (
 			<nav>
 				<p
-					className="ma3 pa2 underline"
+					onClick={() => this.props.onRouteChange('signin')}
+					className="ma3 pa2 underline pointer"
 					style={{ display: 'flex', justifyContent: 'flex-end' }}
 				>
-					Sign In
+					Sign Out
 				</p>
 			</nav>
 		);
