@@ -45,7 +45,8 @@ class App extends Component {
       left_col: '',
       bottom_row: '',
       right_col: '',
-      route: 'signin'
+      route: 'signin',
+      isSignedIn: false
     };
   }
 
@@ -77,13 +78,20 @@ class App extends Component {
 
   onRouteChange = route => {
     this.setState({ route: route });
+    if (route === 'home') {
+      this.setState({ isSignedIn: true });
+    } else if (route === 'signout') {
+      this.setState({ isSignedIn: false });
+    }
   };
 
   render() {
     return (
       <div className="App">
-        <Navigation onRouteChange={this.onRouteChange} />
-
+        <Navigation
+          onRouteChange={this.onRouteChange}
+          isSignedIn={this.state.isSignedIn}
+        />
         {this.state.route === 'home' ? (
           <div>
             <Logo />
