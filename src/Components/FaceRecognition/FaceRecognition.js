@@ -3,34 +3,32 @@ import './Facerecognition.css';
 
 class FaceRecognition extends Component {
 	render() {
-		let top_value = Number(this.props.top_row) * 500;
-		let right_value = Number(this.props.right_col) * 500;
-		let bottom_value = Number(this.props.bottom_row) * 500;
-		let left_value = Number(this.props.left_col) * 500;
-		return (
-			<div className="shadow br2 tc ma3">
-				<img
-					src={this.props.imageUrl}
-					alt=""
-					width="500px"
-					height="auto"
-				/>
-				<p>{top_value}</p>
-				<p>{right_value}</p>
-				<p>{bottom_value}</p>
-				<p>{left_value}</p>
-				<div
-					className="bounding-box"
-					style={{
-						top: top_value,
-						right: right_value,
-						bottom: 350,
-						left: 121
-					}}
-				/>
-			</div>
-		);
+		console.log(this.props.top_row);
+		if (Number(this.props.top_row) > 0) {
+			return (
+				<div className="center ma">
+					<div className="mt2 absolute">
+						<img
+							id="inputimage"
+							src={this.props.imageUrl}
+							alt=""
+							height="500px"
+							width="auto"
+						/>
+
+						<div
+							className="bounding-box"
+							style={{
+								top: Number(this.props.top_row),
+								right: Number(this.props.right_col),
+								bottom: Number(this.props.bottom_row),
+								left: Number(this.props.left_col)
+							}}
+						/>
+					</div>
+				</div>
+			);
+		} else return null;
 	}
 }
-
 export default FaceRecognition;

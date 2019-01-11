@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Navigation from './Components/Navigation/Navigation';
+import SignIn from './Components/SignIn/SignIn';
 import Logo from './Components/Logo/Logo';
 import Rank from './Components/Rank/Rank';
 import ImageLinkForm from './Components/ImageLinkForm/ImageLinkForm';
@@ -42,7 +43,8 @@ class App extends Component {
       top_row: '',
       left_col: '',
       bottom_row: '',
-      right_col: ''
+      right_col: '',
+      route: 'signi'
     };
   }
 
@@ -59,15 +61,17 @@ class App extends Component {
   };
 
   displayFaceBox = response => {
+    const clarifaiFace =
+      response.outputs[0].data.regions[0].region_info.bounding_box;
+    const image = document.getElementById('inputimage');
+    const width = Number(image.width);
+    const height = Number(image.height);
+    console.log(width, height);
     this.setState({
-      top_row:
-        response.outputs[0].data.regions[0].region_info.bounding_box.top_row,
-      left_col:
-        response.outputs[0].data.regions[0].region_info.bounding_box.left_col,
-      bottom_row:
-        response.outputs[0].data.regions[0].region_info.bounding_box.bottom_row,
-      right_col:
-        response.outputs[0].data.regions[0].region_info.bounding_box.right_col
+      left_col: clarifaiFace.left_col * width,
+      top_row: clarifaiFace.top_row * height,
+      right_col: width - clarifaiFace.right_col * width,
+      bottom_row: height - clarifaiFace.bottom_row * height
     });
   };
 
@@ -75,21 +79,28 @@ class App extends Component {
     return (
       <div className="App">
         <Navigation />
-        <Logo />
-        <Rank />
-        <ImageLinkForm
-          onSubmit={this.onSubmit}
-          onInputChange={this.onInputChange}
-        />
-        <FaceRecognition
-          imageUrl={this.state.imageUrl}
-          top_row={this.state.top_row}
-          left_col={this.state.left_col}
-          bottom_row={this.state.bottom_row}
-          right_col={this.state.right_col}
-        />
+        {this.state.route === 'signin' ? (
+          <SignIn />
+        ) : (
+          <div>
+            <Logo />
+            <Rank />
+            <ImageLinkForm
+              onSubmit={this.onSubmit}
+              onInputChange={this.onInputChange}
+            />
+            <FaceRecognition
+              onSubmit={this.onSubmit}
+              imageUrl={this.state.imageUrl}
+              top_row={this.state.top_row}
+              left_col={this.state.left_col}
+              bottom_row={this.state.bottom_row}
+              right_col={this.state.right_col}
+            />
 
-        <Particles className="particles" params={particlesOptions} />
+            <Particles className="particles" params={particlesOptions} />
+          </div>
+        )}
       </div>
     );
   }
