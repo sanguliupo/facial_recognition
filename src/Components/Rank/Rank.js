@@ -4,8 +4,8 @@ class Rank extends Component {
 	render() {
 		return (
 			<div className="tc courier f2">
-				<p>Your current rank is</p>
-				<p>#5</p>
+				<p>{this.props.name}, Your current entry count is</p>
+				<p>{this.props.entries}</p>
 			</div>
 		);
 	}
