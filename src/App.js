@@ -6,33 +6,33 @@ import Logo from './Components/Logo/Logo';
 import Rank from './Components/Rank/Rank';
 import ImageLinkForm from './Components/ImageLinkForm/ImageLinkForm';
 import FaceRecognition from './Components/FaceRecognition/FaceRecognition';
-// import Particles from 'react-particles-js';
+import Particles from 'react-particles-js';
 import './App.css';
 
 
 
-// const particlesOptions = {
-//   particles: {
-//     number: {
-//       value: 400,
-//       density: {
-//         enable: true,
-//         value_area: 3000
-//       }
-//     },
-//     size: {
-//       value: 3
-//     }
-//   },
-//   interactivity: {
-//     events: {
-//       onhover: {
-//         enable: true,
-//         mode: 'repulse'
-//       }
-//     }
-//   }
-// };
+const particlesOptions = {
+  particles: {
+    number: {
+      value: 400,
+      density: {
+        enable: true,
+        value_area: 3000
+      }
+    },
+    size: {
+      value: 3
+    }
+  },
+  interactivity: {
+    events: {
+      onhover: {
+        enable: true,
+        mode: 'repulse'
+      }
+    }
+  }
+};
 
 const initialState={
   input: '',
@@ -152,7 +152,7 @@ class App extends Component {
               bottom_row={this.state.bottom_row}
               right_col={this.state.right_col}
             />
-             
+            <Particles className="particles" params={particlesOptions} />
           </div>
         ) : this.state.route === 'signin' ? (
           <SignIn onRouteChange={this.onRouteChange} loadUser={this.loadUser} />
