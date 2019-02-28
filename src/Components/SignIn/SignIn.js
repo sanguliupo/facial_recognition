@@ -18,7 +18,7 @@ class SignIn extends Component {
 	};
 
 	onSubmitSignIn = () => {
-		fetch('https://salty-ridge-15154.herokuapp.com/signin', {
+		fetch('https://smartbrain111-backend.herokuapp.com/signin', {
 			method: 'post',
 			headers: { 'Content-Type': 'application/json' },
 			body: JSON.stringify({

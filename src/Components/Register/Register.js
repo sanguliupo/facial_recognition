@@ -23,7 +23,7 @@ class Register extends Component {
 	};
 
 	onRegister = () => {
-		fetch('https://salty-ridge-15154.herokuapp.com/register', {
+		fetch('https://smartbrain111-backend.herokuapp.com/register', {
 			method: 'post',
 			headers: { 'Content-Type': 'application/json' },
 			body: JSON.stringify({
