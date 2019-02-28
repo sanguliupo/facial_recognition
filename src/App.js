@@ -9,8 +9,6 @@ import FaceRecognition from './Components/FaceRecognition/FaceRecognition';
 import Particles from 'react-particles-js';
 import './App.css';
 
-
-
 const particlesOptions = {
   particles: {
     number: {
